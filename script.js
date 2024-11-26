@@ -14,6 +14,30 @@ function ChoisirChaine(listeMots)
     
 }
 
+function choisirMode(saisieUtilisateur,mode = null)
+{
+    switch (saisieUtilisateur)
+    {
+    case "q":
+    case "exit": 
+        console.log("quitter")
+        break
+    case "mot":
+    case "phrase":
+        console.log("lancement de la partie avec le mode " + saisieUtilisateur)
+        jeu(saisieUtilisateur)
+        break
+    case "o":
+        if (mode == "phrase" || mode == "mot")
+        {
+            console.log("lancement de la partie avec le mode " + saisieUtilisateur)
+            jeu(mode)
+        }
+        break
+    default:
+        console.log("la valeur saisie n'est pas attendu")
+    }
+}
 
 // le tableau de listeDeMot est definis dans le fichier config.js
 // le tableau listeDePhrase est definis dans le fichier config.js
@@ -41,7 +65,7 @@ function jeu(mode)
     }
  
     saisieUtilisateur = null
-    phraseAffiche = "Vous avez correctement saisie la chaine au bout de " + NombreEssaie + 
+    phraseAffiche = "Vous avez correctement saisie la chaine au bout de " + NombreEssaie + " essaie(s)" +
                     "\n pour rejouer tapez : o " + 
                     "\n pour changer de mode tapez : mot ou phrase" +
                     "\n pour quitter tapez : q"
@@ -50,20 +74,7 @@ function jeu(mode)
     {
         saisieUtilisateur = prompt(phraseAffiche)
     }
-    switch (saisieUtilisateur)
-    {
-    case "q":
-    case "exit": 
-        console.log("quitter")
-        break
-    case "mot":
-    case "phrase":
-        console.log("lancement de la partie avec le mode " + saisieUtilisateur)
-        jeu(saisieUtilisateur)
-        break
-    default:
-        console.log("la valeur saisie n'est pas attendu")
-    }
+    choisirMode(saisieUtilisateur,mode)
 
 }
 
@@ -77,23 +88,7 @@ function lancerJeu()
         saisieUtilisateur = prompt( phraseAffiche)
         console.log(saisieUtilisateur)
     }
-
-    switch (saisieUtilisateur)
-    {
-    case "q":
-    case "exit": 
-        console.log("quitter")
-        break
-    case "mot":
-    case "phrase":
-        console.log("lancement de la partie avec le mode " + saisieUtilisateur)
-        jeu(saisieUtilisateur)
-        break
-    default:
-        console.log("la valeur saisie n'est pas attendu")
-    }
-
-
+    choisirMode(saisieUtilisateur)
 }
 
 
