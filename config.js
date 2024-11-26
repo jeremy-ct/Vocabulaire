@@ -21,7 +21,7 @@ let listeDeMot = [
 
 
 let listeDePhrase = [
-    "Un avion est la.","la voiture roule.","Bonjour, comment tu vas.",
+    "Un avion est la.","la voiture roule.","Bonjour, comment tu vas ?",
     "Le chat dort sur le canapé","Le soleil brille aujourd'hui",
     "Le chien court dans le jardin.","Il pleut beaucoup ce soir.",
     "La porte est ouverte.","Je bois un verre d'eau.",

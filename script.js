@@ -22,6 +22,7 @@ function jeu(mode)
     let chaine = null
     let saisieUtilisateur = null
     let phraseAffiche = null
+    let NombreEssaie = 0
 
     if(mode == "phrase")
     {
@@ -30,21 +31,45 @@ function jeu(mode)
     {
         chaine = ChoisirChaine(listeDeMot)
     }
-    console.log(chaine.length)
-    console.log(chaine)
+
     phraseAffiche = "Veuillez saisir : " + chaine 
 
     while ( saisieUtilisateur !== chaine && saisieUtilisateur !== "q")
     {
+        NombreEssaie += 1
         saisieUtilisateur = prompt( phraseAffiche)
     }
+ 
+    saisieUtilisateur = null
+    phraseAffiche = "Vous avez correctement saisie la chaine au bout de " + NombreEssaie + 
+                    "\n pour rejouer tapez : o " + 
+                    "\n pour changer de mode tapez : mot ou phrase" +
+                    "\n pour quitter tapez : q"
+
+    while ( saisieUtilisateur !== "o" && saisieUtilisateur !== "mot" && saisieUtilisateur !== "phrase" && saisieUtilisateur !== "q" && saisieUtilisateur !== "exit")
+    {
+        saisieUtilisateur = prompt(phraseAffiche)
+    }
+    switch (saisieUtilisateur)
+    {
+    case "q":
+    case "exit": 
+        console.log("quitter")
+        break
+    case "mot":
+    case "phrase":
+        console.log("lancement de la partie avec le mode " + saisieUtilisateur)
+        jeu(saisieUtilisateur)
+        break
+    default:
+        console.log("la valeur saisie n'est pas attendu")
+    }
+
 }
 
 
 function lancerJeu()
 {
-    let score = 0
-    const NombreEssaie = 3 
     let saisieUtilisateur = null
     phraseAffiche = "Vous voulez un mot ou une phrase"
     while ( saisieUtilisateur !== "mot" && saisieUtilisateur !== "phrase" && saisieUtilisateur !== "q" && saisieUtilisateur !== "exit")
