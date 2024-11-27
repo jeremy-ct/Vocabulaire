@@ -1,5 +1,12 @@
 let listeDeMot = [
     "avion", "voiture", "camion",
+    "bateau", "train"
+];
+
+
+/*
+let listeDeMot = [
+    "avion", "voiture", "camion",
     "bateau", "train", "vélo", 
     "moto", "tram", "bus", 
     "helicoptere", "fusee", "scooter", 
@@ -18,7 +25,7 @@ let listeDeMot = [
     "skateboard", "hoverboard", "trottinette", 
     "bus scolaire", "van", "soute"
 ];
-
+*/
 
 let listeDePhrase = [
     "Un avion est la.","la voiture roule.","Bonjour, comment tu vas ?",

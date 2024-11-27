@@ -1,3 +1,8 @@
+// Copies des listes initiales pour éviter de modifier les originales
+let motsDisponibles = [...listeDeMot];
+let phrasesDisponibles = [...listeDePhrase];
+
+
 function AfficheScore(score, essaie, tailleTableau)
 {
     return "Vous avez reussi a trouver " + score + " mot(s) avec vos " + essaie + " essaies sur les " + tailleTableau + " mot(s)"
@@ -10,7 +15,18 @@ function randomVal(min,max)
 
 function ChoisirChaine(listeMots)
 {
-    return listeMots[randomVal(0,listeMots.length)] 
+    if (listeMots.length === 0) {
+        console.log("Tous les mots ou phrases ont déjà été utilisés !");
+        return null;
+    }
+    
+    const index =  randomVal(0,listeMots.length)
+    const element = listeMots[index]
+
+     // Retirer l'élément utilisé de la liste
+     listeMots.splice(index, 1);   
+
+    return element
     
 }
 
@@ -50,10 +66,16 @@ function jeu(mode)
 
     if(mode == "phrase")
     {
-        chaine = ChoisirChaine(listeDePhrase)
+        chaine = ChoisirChaine(phrasesDisponibles)
     } else if (mode == "mot")
     {
-        chaine = ChoisirChaine(listeDeMot)
+        chaine = ChoisirChaine(motsDisponibles)
+    }
+
+    if (chaine == null)
+    {
+        prompt(`fin de partie, il n'y a plus de ${mode}`)
+        return
     }
 
     phraseAffiche = "Veuillez saisir : " + chaine 
