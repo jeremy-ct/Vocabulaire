@@ -1,10 +1,4 @@
-let listeDeMot = [
-    "avion", "voiture", "camion",
-    "bateau", "train"
-];
 
-
-/*
 let listeDeMot = [
     "avion", "voiture", "camion",
     "bateau", "train", "vélo", 
@@ -25,7 +19,7 @@ let listeDeMot = [
     "skateboard", "hoverboard", "trottinette", 
     "bus scolaire", "van", "soute"
 ];
-*/
+
 
 let listeDePhrase = [
     "Un avion est la.","la voiture roule.","Bonjour, comment tu vas ?",
@@ -38,3 +32,23 @@ let listeDePhrase = [
     "La fleur pousse dans le jardin.","Il mange une pomme.",
     "Nous regardons un film ce soir.",
 ];
+
+
+// Copies des listes initiales pour éviter de modifier les originales
+let motsDisponibles = [...listeDeMot];
+let phrasesDisponibles = [...listeDePhrase];
+
+//acces a la zone du mode de jeu
+const zoneOptions = document.querySelector('.zoneOptions')
+
+//acces a la valeur selectionné de zone option
+const selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
+
+//acces au contenue de la saisie
+const inputEcriture = document.getElementById('inputEcriture');
+
+// acces au bouton de validation de la saisie
+const btnValiderMot = document.getElementById('btnValiderMot');
+
+//acces a la zone d'affichage des chaines à saisir
+const zoneProposition = document.querySelector('.zoneProposition');
