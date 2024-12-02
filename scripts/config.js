@@ -47,8 +47,16 @@ const selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:ch
 //acces au contenue de la saisie
 const inputEcriture = document.getElementById('inputEcriture');
 
+const inputField = document.getElementById("inputEcriture");
+
 // acces au bouton de validation de la saisie
 const btnValiderMot = document.getElementById('btnValiderMot');
 
 //acces a la zone d'affichage des chaines à saisir
 const zoneProposition = document.querySelector('.zoneProposition');
+
+//acces à l'affichage du score
+const zoneScore = document.getElementById("score")
+
+let score = 0
+let nbEssaies = 0

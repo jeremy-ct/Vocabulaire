@@ -23,7 +23,7 @@
         <!-- MAIN -->
         <main>
             <div class="zoneOptions">
-                <p>Choisissez votre option et tapez la proposition qui s'affiche dans le champ en-dessous.</p>
+                <p>Choisissez le mode de jeu.</p>
                 <div class="optionSource">
                     <input type="radio" name="optionSource" id="mots" value="1" checked>
                     <label for="mots">Mots</label>
@@ -42,11 +42,11 @@
             </div>
 
             <div class="zoneScore">
-                Votre score : <span>0</span>
+                Votre score : <span id="score">0</span>
             </div>
 
-            <div class="zonePartage">
-                <button>Partager</button>
+            <div class="zoneInit">
+                <button>Réinitialiser</button>
             </div>
             
         </main>
@@ -54,19 +54,5 @@
         <!-- FOOTER -->
         <footer>
         </footer>
-
-        <!-- Popup de partage -->
-        <div class="popupBackground">
-            <div class="popup">
-                <div>Partagez votre score</div>
-                <form novalidate>
-                    <label for="nom">Votre nom</label>
-                    <input type="text" id="nom" name="nom" placeholder="Votre nom">
-                    <label for="email">Avec qui voulez-vous partager votre score ?</label>
-                    <input type="email" id="email" name="email" placeholder="nom@domaine.com">
-                    <button id="btnEnvoyerMail">Envoyer</button>
-                </form>
-            </div>
-        </div>
     </body>
 </html>

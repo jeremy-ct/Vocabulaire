@@ -39,6 +39,53 @@ zoneOptions.addEventListener('change', (event) => {
         }
     })
 
+// Ajouter un événement "click" au bouton
+btnValiderMot.addEventListener('click', () => {
+    const valeurSaisie = inputEcriture.value
+    let verif = false
+    console.log("Valeur saisie : ", valeurSaisie)
+    verif = verifChaine()
+    console.log(verif)
+    inputEcriture.value = null
+    if (verif)
+    {
+        score++
+        nbEssaies++
+        choisirMode()
+    }
+    else
+    {
+        nbEssaies++
+    }
+    actualiseScore()
+})
+
+// creer une fonction actualise score 
+function actualiseScore()
+{
+    zoneScore.textContent = `${score} / ${nbEssaies}`
+}
+
+// Ajouter un écouteur d'événements sur la touche entrer
+inputField.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      btnValiderMot.click();
+    }
+  });
+
+
+function verifChaine()
+{
+    const inputVal = inputEcriture.value
+    const proposition = zoneProposition.textContent
+    console.log(inputVal)
+    console.log(proposition)
+    if (inputVal === proposition)
+    {
+        return true
+    }
+    return false
+}
 
 // phraseDisponible et motDisponible sont des variables globales definis en haut du fichier
 function jeu(mode)
@@ -64,7 +111,7 @@ function jeu(mode)
         return
     }
     zoneProposition.textContent = chaine
-    phraseAffiche = "Veuillez saisir : " + chaine 
+
 
     return
 }
