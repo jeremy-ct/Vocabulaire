@@ -42,7 +42,7 @@ let phrasesDisponibles = [...listeDePhrase];
 const zoneOptions = document.querySelector('.zoneOptions')
 
 //acces a la valeur selectionné de zone option
-const selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
+let selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
 
 //acces au contenue de la saisie
 const inputEcriture = document.getElementById('inputEcriture');

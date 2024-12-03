@@ -28,13 +28,18 @@ function ChoisirChaine(listeMots)
 
 function choisirMode()
 {
-    console.log(`Option sélectionnée : ${selectedOption.id} (${selectedOption.value})`)
+
+
+    console.log(`Option sélectionnée : ${selectedOption.id} `)
     jeu(selectedOption.id)
 }
 
 // Ajouter un écouteur d'événements pour les changements dans la zone des options
 zoneOptions.addEventListener('change', (event) => {
     if (event.target.name === 'optionSource') {
+            //select option a du être redefinis ici pour qu'il puisse s'actualiser
+            selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
+
             choisirMode()
         }
     })
@@ -78,8 +83,8 @@ function verifChaine()
 {
     const inputVal = inputEcriture.value
     const proposition = zoneProposition.textContent
-    console.log(inputVal)
-    console.log(proposition)
+    //console.log(inputVal)
+    //console.log(proposition)
     if (inputVal === proposition)
     {
         return true
