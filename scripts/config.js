@@ -34,6 +34,18 @@ let listeDePhrase = [
 ];
 
 
+//-----------------pour faire des tests----------------------------
+/*
+let listeDeMot = [
+    "avion", "voiture", "camion"
+];
+
+
+let listeDePhrase = [
+    "Un avion est la.","la voiture roule.","Bonjour, comment tu vas ?"
+];
+*/
+
 // Copies des listes initiales pour éviter de modifier les originales
 let motsDisponibles = [...listeDeMot];
 let phrasesDisponibles = [...listeDePhrase];
@@ -45,12 +57,13 @@ const zoneOptions = document.querySelector('.zoneOptions')
 let selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
 
 //acces au contenue de la saisie
-const inputEcriture = document.getElementById('inputEcriture');
-
-const inputField = document.getElementById("inputEcriture");
+let inputEcriture = document.getElementById('inputEcriture');
 
 // acces au bouton de validation de la saisie
 const btnValiderMot = document.getElementById('btnValiderMot');
+
+// acces au bouton de reinitialisation
+const btnInit = document.getElementById('btnInit');
 
 //acces a la zone d'affichage des chaines à saisir
 const zoneProposition = document.querySelector('.zoneProposition');
@@ -60,3 +73,8 @@ const zoneScore = document.getElementById("score")
 
 let score = 0
 let nbEssaies = 0
+
+// permet de definir si la partie est terminé ou si elle est en cours
+let etat = true
+
+inputEcriture

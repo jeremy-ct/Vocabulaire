@@ -11,7 +11,6 @@ function randomVal(min,max)
 function ChoisirChaine(listeMots)
 {
     if (listeMots.length === 0) {
-        console.log("Tous les mots ou phrases ont déjà été utilisés !");
         return null;
     }
     
@@ -25,34 +24,46 @@ function ChoisirChaine(listeMots)
     
 }
 
-
 function choisirMode()
 {
-
-
+    debloquerZone()
     console.log(`Option sélectionnée : ${selectedOption.id} `)
     jeu(selectedOption.id)
 }
 
-// Ajouter un écouteur d'événements pour les changements dans la zone des options
-zoneOptions.addEventListener('change', (event) => {
-    if (event.target.name === 'optionSource') {
-            //select option a du être redefinis ici pour qu'il puisse s'actualiser
-            selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
 
-            choisirMode()
-        }
-    })
 
-// Ajouter un événement "click" au bouton
-btnValiderMot.addEventListener('click', () => {
-    const valeurSaisie = inputEcriture.value
-    let verif = false
-    console.log("Valeur saisie : ", valeurSaisie)
-    verif = verifChaine()
-    console.log(verif)
+// creer une fonction actualise score 
+function actualiseScore()
+{
+    zoneScore.textContent = `${score} / ${nbEssaies}`
+}
+
+//fonction pour recommencer la partie
+function initJeu()
+{
+    score = 0
+    nbEssaies = 0
+    etat = true
+    motsDisponibles = [...listeDeMot]
+    phrasesDisponibles = [...listeDePhrase]
     inputEcriture.value = null
-    if (verif)
+    actualiseScore()
+    choisirMode()
+}
+
+
+
+function verifChaine()
+{
+    const valeurSaisie = inputEcriture.value
+    const proposition = zoneProposition.textContent
+    if (valeurSaisie==null || valeurSaisie.length == 0)
+    {
+        return
+    }
+
+    if (valeurSaisie === proposition)
     {
         score++
         nbEssaies++
@@ -62,35 +73,11 @@ btnValiderMot.addEventListener('click', () => {
     {
         nbEssaies++
     }
+    //on remet le champs a null apres la verification
+    inputEcriture.value = null
     actualiseScore()
-})
-
-// creer une fonction actualise score 
-function actualiseScore()
-{
-    zoneScore.textContent = `${score} / ${nbEssaies}`
 }
 
-// Ajouter un écouteur d'événements sur la touche entrer
-inputField.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      btnValiderMot.click();
-    }
-  });
-
-
-function verifChaine()
-{
-    const inputVal = inputEcriture.value
-    const proposition = zoneProposition.textContent
-    //console.log(inputVal)
-    //console.log(proposition)
-    if (inputVal === proposition)
-    {
-        return true
-    }
-    return false
-}
 
 // phraseDisponible et motDisponible sont des variables globales definis en haut du fichier
 function jeu(mode)
@@ -112,7 +99,10 @@ function jeu(mode)
     }
     console.log(chaine)
     if (chaine == null)
-    {
+    {   
+        zoneProposition.textContent = `Tous les ${mode} ont été trouvés.`
+        etat = false
+        bloquerZone()
         return
     }
     zoneProposition.textContent = chaine
@@ -126,3 +116,45 @@ function lancerJeu()
 {
     choisirMode()
 }
+
+function bloquerZone() {
+    inputEcriture = document.getElementById('inputEcriture');
+    inputEcriture.disabled = true; // Ajoute l'attribut "disabled"
+  }
+  
+  function debloquerZone() {
+    inputEcriture = document.getElementById('inputEcriture');
+    inputEcriture.disabled = false; // Supprime l'attribut "disabled"
+  }
+
+
+//----------------------------EVENEMENT-------------------------------------
+
+// Ajouter un écouteur d'événements pour les changements dans la zone des options
+zoneOptions.addEventListener('change', (event) => {
+    if (event.target.name === 'optionSource') {
+            //select option a du être redefinis ici pour qu'il puisse s'actualiser
+            selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
+
+            choisirMode()
+        }
+    })
+
+// Ajouter un événement "click" au bouton
+btnValiderMot.addEventListener('click', () => {
+    verifChaine()
+})
+
+// Ajouter un écouteur d'événements sur la touche entrer qui fait la meme action que le bouton valider
+inputEcriture.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      btnValiderMot.click();
+    }
+  })
+
+  // Ajouter un événement "click" au bouton init pour reinitialiser la partie
+btnInit.addEventListener('click', () => {
+    initJeu()
+})
+
+  //-----------------------------FIN EVENEMENT------------------------------------
