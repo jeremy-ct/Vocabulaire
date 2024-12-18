@@ -37,6 +37,7 @@ function choisirMode()
 function actualiseScore()
 {
     zoneScore.textContent = `${score} / ${nbEssaies}`
+    zoneScorePop.textContent =  `${score} / ${nbEssaies}`
 }
 
 //fonction pour recommencer la partie
@@ -127,18 +128,69 @@ function bloquerZone() {
     inputEcriture.disabled = false; // Supprime l'attribut "disabled"
   }
 
+  function dataForm(){
+    // Récupérer les données du formulaire
+    // pour utiliser formData il faut avoir la classe name dans les inputs du formulaire
+    const formData = new FormData(form);
+    let nom = null
+    let prenom = null
+    let mail = null
+
+    formData.forEach((value, key) => {
+    switch (key)
+    {
+        case "nom":
+            nom = value
+            break
+        case "prenom":
+            prenom = value
+            break
+        case "mail":
+            mail = value
+            break
+    }
+    });
+    console.log(nom)
+    console.log(prenom)
+    console.log(mail)
+  }
+//..........................POP UP.........................................
+
+btnPartager.addEventListener("click", () => {
+    popupPartager.classList.remove("hidden"); // Affiche la popup
+});
+
+btnFermerPartager.addEventListener("click", () => {
+    popupPartager.classList.add("hidden"); // Masque la popup
+});
+
+form.addEventListener("submit", (event) => {
+    // On empêche le comportement par défaut
+    event.preventDefault();
+});
+
+btnEnvoyerPartager.addEventListener("click",()=> {
+    popupPartager.classList.add("hidden"); // Masque la popup
+    dataForm()
+    form.reset()
+    
+})
+
+
 
 //----------------------------EVENEMENT-------------------------------------
 
-// Ajouter un écouteur d'événements pour les changements dans la zone des options
-zoneOptions.addEventListener('change', (event) => {
-    if (event.target.name === 'optionSource') {
-            //select option a du être redefinis ici pour qu'il puisse s'actualiser
-            selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
 
+// Ajouter un écouteur d'événements pour les changements dans la zone des options
+
+let listeBtnMode = document.querySelectorAll(".optionSource input")
+for (let i = 0 ; i< listeBtnMode.length; i++) {
+    listeBtnMode[i].addEventListener("change" ,(event) => {
+            selectedOption = event.target
+            console.log(event)
             choisirMode()
-        }
-    })
+        })
+}
 
 // Ajouter un événement "click" au bouton
 btnValiderMot.addEventListener('click', () => {

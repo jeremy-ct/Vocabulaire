@@ -77,4 +77,14 @@ let nbEssaies = 0
 // permet de definir si la partie est terminé ou si elle est en cours
 let etat = true
 
-inputEcriture
+// POPUP
+const btnPartager = document.getElementById("btnPartager");
+const popupPartager = document.getElementById("popupPartager");
+const btnFermerPartager = document.getElementById("btnFermerPartager");
+const btnEnvoyerPartager = document.getElementById("btnEnvoyerPartager")
+
+
+// FORMULAIRE
+const form = document.querySelector('form');
+
+const zoneScorePop = document.getElementById("scorePop")

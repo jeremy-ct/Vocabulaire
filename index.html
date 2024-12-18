@@ -47,6 +47,31 @@
 
             <div class="zoneInit">
                 <button id="btnInit">Réinitialiser</button>
+                <button id="btnPartager">Partager</button>
+            </div>
+
+            <div id="popupPartager" class="popup hidden">
+                <div class="popupContent">
+                    <form>
+                        <p>Partagez votre score !</p>
+
+                        <label for="nom">Nom :</label>
+                        <input type="text" id="nom" name ="nom">
+
+                        <label for="prenom">Prénom :</label>
+                        <input type="text" id="prenom" name="prenom">
+
+                        <label for="mail">Mail :</label>
+                        <input type="text" id="mail" name="mail">
+
+                        <div class="zoneScorePop">
+                            Votre score : <span id="scorePop">0</span>
+                        </div>
+                        
+                        <button id="btnEnvoyerPartager">Envoyer</button>
+                    </form>
+                    <button id="btnFermerPartager">Fermer</button>
+                </div>
             </div>
             
         </main>
@@ -54,5 +79,6 @@
         <!-- FOOTER -->
         <footer>
         </footer>
+
     </body>
 </html>
