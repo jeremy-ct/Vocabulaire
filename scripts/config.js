@@ -1,5 +1,5 @@
 
-let listeDeMot = [
+export const listeDeMot = [
     "avion", "voiture", "camion",
     "bateau", "train", "vélo", 
     "moto", "tram", "bus", 
@@ -21,7 +21,7 @@ let listeDeMot = [
 ];
 
 
-let listeDePhrase = [
+export const listeDePhrase = [
     "Un avion est la.","la voiture roule.","Bonjour, comment tu vas ?",
     "Le chat dort sur le canapé","Le soleil brille aujourd'hui",
     "Le chien court dans le jardin.","Il pleut beaucoup ce soir.",
@@ -46,45 +46,4 @@ let listeDePhrase = [
 ];
 */
 
-// Copies des listes initiales pour éviter de modifier les originales
-let motsDisponibles = [...listeDeMot];
-let phrasesDisponibles = [...listeDePhrase];
 
-//acces a la zone du mode de jeu
-const zoneOptions = document.querySelector('.zoneOptions')
-
-//acces a la valeur selectionné de zone option
-let selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
-
-//acces au contenue de la saisie
-let inputEcriture = document.getElementById('inputEcriture');
-
-// acces au bouton de validation de la saisie
-const btnValiderMot = document.getElementById('btnValiderMot');
-
-// acces au bouton de reinitialisation
-const btnInit = document.getElementById('btnInit');
-
-//acces a la zone d'affichage des chaines à saisir
-const zoneProposition = document.querySelector('.zoneProposition');
-
-//acces à l'affichage du score
-const zoneScore = document.getElementById("score")
-
-let score = 0
-let nbEssaies = 0
-
-// permet de definir si la partie est terminé ou si elle est en cours
-let etat = true
-
-// POPUP
-const btnPartager = document.getElementById("btnPartager");
-const popupPartager = document.getElementById("popupPartager");
-const btnFermerPartager = document.getElementById("btnFermerPartager");
-const btnEnvoyerPartager = document.getElementById("btnEnvoyerPartager")
-
-
-// FORMULAIRE
-const form = document.querySelector('form');
-
-const zoneScorePop = document.getElementById("scorePop")

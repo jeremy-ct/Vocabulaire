@@ -1,7 +1,68 @@
+import { listeDeMot, listeDePhrase } from './config.js';
+
+//------------------------------ VARIABLE-----------------------
+// Copies des listes initiales pour éviter de modifier les originales
+let motsDisponibles = [...listeDeMot];
+let phrasesDisponibles = [...listeDePhrase];
+
+//acces a la zone du mode de jeu
+const zoneOptions = document.querySelector('.zoneOptions')
+
+//acces a la valeur selectionné de zone option
+let selectedOption  = zoneOptions.querySelector('input[name="optionSource"]:checked')
+
+//acces au contenue de la saisie
+let inputEcriture = document.getElementById('inputEcriture');
+
+// acces au bouton de validation de la saisie
+const btnValiderMot = document.getElementById('btnValiderMot');
+
+// acces au bouton de reinitialisation
+const btnInit = document.getElementById('btnInit');
+
+//acces a la zone d'affichage des chaines à saisir
+const zoneProposition = document.querySelector('.zoneProposition');
+
+//acces à l'affichage du score
+const zoneScore = document.getElementById("score")
+
+let score = 0
+let nbEssaies = 0
+
+
+// permet de definir si la partie est terminé ou si elle est en cours
+let etat = true
+
+
+// POPUP
+const btnPartager = document.getElementById("btnPartager");
+const popupPartager = document.getElementById("popupPartager");
+const btnFermerPartager = document.getElementById("btnFermerPartager");
+const btnEnvoyerPartager = document.getElementById("btnEnvoyerPartager")
+
+
+// FORMULAIRE
+const form = document.querySelector('form');
+
+const zoneScorePop = document.getElementById("scorePop")
+
+//--------------------FIN VARIABLE
+
+
+//--------------------Function a Appeller-------------------
+
+export function lancerJeu()
+{
+    choisirMode()
+}
+//---------------------FIN------------------------------------
+
+/*
 function AfficheScore(score, essaie, tailleTableau)
 {
     return "Vous avez reussi a trouver " + score + " mot(s) avec vos " + essaie + " essaies sur les " + tailleTableau + " mot(s)"
 }
+*/
 
 function randomVal(min,max)
 {
@@ -26,9 +87,12 @@ function ChoisirChaine(listeMots)
 
 function choisirMode()
 {
-    debloquerZone()
-    console.log(`Option sélectionnée : ${selectedOption.id} `)
-    jeu(selectedOption.id)
+    if (etat == true)
+    {
+        debloquerZone()
+        console.log(`Option sélectionnée : ${selectedOption.id} `)
+        jeu(selectedOption.id)
+    }
 }
 
 
@@ -84,7 +148,6 @@ function verifChaine()
 function jeu(mode)
 {
     let chaine = null
-    let phraseAffiche = null
     let modeJeu =null
 
     if(mode == "phrases") { modeJeu = phrasesDisponibles } 
@@ -113,11 +176,6 @@ function jeu(mode)
 }
 
 
-function lancerJeu()
-{
-    choisirMode()
-}
-
 function bloquerZone() {
     inputEcriture = document.getElementById('inputEcriture');
     inputEcriture.disabled = true; // Ajoute l'attribut "disabled"
@@ -132,28 +190,42 @@ function bloquerZone() {
     // Récupérer les données du formulaire
     // pour utiliser formData il faut avoir la classe name dans les inputs du formulaire
     const formData = new FormData(form);
-    let nom = null
-    let prenom = null
-    let mail = null
-
-    formData.forEach((value, key) => {
-    switch (key)
-    {
-        case "nom":
-            nom = value
-            break
-        case "prenom":
-            prenom = value
-            break
-        case "mail":
-            mail = value
-            break
-    }
-    });
-    console.log(nom)
-    console.log(prenom)
-    console.log(mail)
+    const formObject = Object.fromEntries(formData.entries());
+    console.log(formObject);
+    //sendMail(formObject)
   }
+
+  /* A revoir methode pour envoyer des mails
+  function sendMail(formObject) {
+    const nom = formObject.nom || null;
+    const prenom = formObject.prenom || null;
+    const mail = formObject.mail || null;
+  
+    console.log(`send mail : ${nom}`);
+    console.log(`send mail : ${prenom}`);
+    console.log(`send mail : ${mail}`);
+  
+    const serviceID = "service_7xnq739"; // Remplacez par votre Service ID
+    const templateID = "template_jdu3rgq"; // Remplacez par votre Template ID
+  
+    const templateParams = {
+      nom: nom,
+      prenom: prenom,
+      mail: mail,
+    };
+   
+    //emailjs.init("X29kHMtuVRsY9tMk0")
+
+    emailjs.send(serviceID, templateID, templateParams)
+      .then(() => {
+        alert("Email envoyé avec succès !");
+      })
+      .catch((err) => {
+        alert("Échec de l'envoi : " + JSON.stringify(err));
+      });
+      
+  }
+  */
 //..........................POP UP.........................................
 
 btnPartager.addEventListener("click", () => {

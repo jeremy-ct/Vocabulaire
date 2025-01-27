@@ -7,17 +7,27 @@
         <title>Document</title>
         <!-- fichier de style css-->
         <link rel="stylesheet" href="style/style.css">
+        
         <!-- l'utilisation de defer permet d'attendre le chargement de la page html avant l'utilisation des fichier js-->
-        <script src="scripts/config.js" defer></script>
-        <script src="scripts/function.js" defer></script>
-        <script src="scripts/main.js" defer></script>
+        
+        <!--API pour utiliser emailJS-->
+        <!--
+        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.11.0/dist/email.min.js"></script>
+        <script>emailjs.init("X29kHMtuVRsY9tMk0"); // Remplacez par votre Public Key </script>
+        -->
+        
+        <script type="module" src="scripts/config.js" defer></script>
+        <script type="module" src="scripts/function.js" defer></script>
+        <script type="module" src="scripts/main.js" defer></script>
+
+
     </head>
     <body>
         <!-- HEADER -->
         <header>
-            <h1>AzerType</h1>
-            <h2>L'application pour écrire plus vite !</h2>
-            <h3>AzerType est une application en ligne pour apprendre à taper plus vite au clavier :)</h3>
+            <h1>Vocabulaire</h1>
+            <h2>L'application pour mémoriser du vocabulaire</h2>
+            <h3></h3>
         </header>
 
         <!-- MAIN -->
