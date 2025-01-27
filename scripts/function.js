@@ -1,9 +1,24 @@
-import { listeDeMot, listeDePhrase } from './config.js';
+import { listeDeMot, listeDeMotJson,listeDePhrase, listeDePhraseJson } from './config.js';
+
+
 
 //------------------------------ VARIABLE-----------------------
+
+const modeJson =true;
+
+let motsDisponibles = null;
+let phrasesDisponibles = null;
+
+let motATrouver = null;
 // Copies des listes initiales pour éviter de modifier les originales
-let motsDisponibles = [...listeDeMot];
-let phrasesDisponibles = [...listeDePhrase];
+if(modeJson === true)
+{
+    motsDisponibles = [...listeDeMotJson];
+    phrasesDisponibles = [...listeDePhraseJson];
+}else{
+    motsDisponibles = [...listeDeMot];
+    phrasesDisponibles = [...listeDePhrase];
+}
 
 //acces a la zone du mode de jeu
 const zoneOptions = document.querySelector('.zoneOptions')
@@ -38,7 +53,11 @@ let etat = true
 const btnPartager = document.getElementById("btnPartager");
 const popupPartager = document.getElementById("popupPartager");
 const btnFermerPartager = document.getElementById("btnFermerPartager");
-const btnEnvoyerPartager = document.getElementById("btnEnvoyerPartager")
+const btnEnvoyerPartager = document.getElementById("btnEnvoyerPartager");
+
+const popupMot = document.getElementById("popupMot");
+const btnFermerMot = document.getElementById("btnFermerMot");
+const zoneMotATRouver = document.getElementById("objATrouve");
 
 
 // FORMULAIRE
@@ -69,19 +88,19 @@ function randomVal(min,max)
     return Math.floor(Math.random() * (max - min) + min)
 }
 
-function ChoisirChaine(listeMots)
+function ChoisirChaine(listeObj)
 {
-    if (listeMots.length === 0) {
+    if (listeObj.length === 0) {
         return null;
     }
     
-    const index =  randomVal(0,listeMots.length)
-    const element = listeMots[index]
+    const index =  randomVal(0,listeObj.length)
+    const element = listeObj[index]
 
      // Retirer l'élément utilisé de la liste
-     listeMots.splice(index, 1);   
+     listeObj.splice(index, 1);   
 
-    return element
+    return element;
     
 }
 
@@ -110,8 +129,15 @@ function initJeu()
     score = 0
     nbEssaies = 0
     etat = true
-    motsDisponibles = [...listeDeMot]
-    phrasesDisponibles = [...listeDePhrase]
+    if (modeJson ==true)
+    {
+        motsDisponibles = [...listeDeMotJson];
+        phrasesDisponibles = [...listeDePhraseJson];
+    }else{
+        motsDisponibles = [...listeDeMot];
+        phrasesDisponibles = [...listeDePhrase];
+    }
+    motATrouver = null;
     inputEcriture.value = null
     actualiseScore()
     choisirMode()
@@ -121,12 +147,18 @@ function initJeu()
 
 function verifChaine()
 {
-    const valeurSaisie = inputEcriture.value
-    const proposition = zoneProposition.textContent
+    const valeurSaisie = inputEcriture.value;
+    let proposition = null;
+    if (modeJson === true){
+        proposition = motATrouver;
+    }else{
+        proposition = zoneProposition.textContent;
+    }
     if (valeurSaisie==null || valeurSaisie.length == 0)
     {
         return
     }
+
 
     if (valeurSaisie === proposition)
     {
@@ -136,7 +168,15 @@ function verifChaine()
     }
     else
     {
-        nbEssaies++
+
+        nbEssaies++;
+        if(modeJson === true)
+        {
+            console.log("Proposition : ", proposition);
+            zoneMotATRouver.textContent = proposition;
+            popupMot.classList.remove("hidden");
+        }
+        console.log(motATrouver);
     }
     //on remet le champs a null apres la verification
     inputEcriture.value = null
@@ -155,7 +195,7 @@ function jeu(mode)
     
     if (modeJeu)
     {
-        chaine = ChoisirChaine(modeJeu)
+        chaine = ChoisirChaine(modeJeu);
     }
     else
     {
@@ -169,9 +209,13 @@ function jeu(mode)
         bloquerZone()
         return
     }
-    zoneProposition.textContent = chaine
-
-
+    if (modeJson=== true)
+    {
+        zoneProposition.textContent = chaine.francais;
+        motATrouver = chaine.hebreu;
+    }else{
+        zoneProposition.textContent = chaine;
+    }
     return
 }
 
@@ -246,9 +290,11 @@ btnEnvoyerPartager.addEventListener("click",()=> {
     dataForm()
     form.reset()
     
-})
+});
 
-
+btnFermerMot.addEventListener("click", () => {
+    popupMot.classList.add("hidden"); // Masque la popup
+});
 
 //----------------------------EVENEMENT-------------------------------------
 
